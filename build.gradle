@@ -1,0 +1,72 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.2"
+
+
+    defaultConfig {
+        minSdkVersion 19
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles 'consumer-rules.pro'
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
+    }
+
+}
+
+dependencies {
+
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    testImplementation 'junit:junit:4.13'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    implementation group: 'commons-io', name: 'commons-io', version: '2.6'
+    implementation group: 'com.jcraft', name: 'jsch', version: '0.1.55'
+}
+
+ext {
+    libraryPackaging = 'aar'                                            //上传aar形式的打包文件
+
+    // jcenter
+    bintrayRepo = "network"                                             // 你上传的位于bintray中的Repository名称，如果没有创建会有一个叫maven的
+    bintrayUserOrg="gmateam"
+    name = 'asflibrary'                                                // 必须和library module的名字相同
+    libraryDesc = ''
+    publishedGroupId = 'com.wangtingzheng.asflibrary'                // 填写groupId， 一般是包名，比如：com.android.support
+    versionName = '1.0.1'                                               // 版本号，比如：22.2.1
+    websiteUrl = 'https://github.com/GMA-Team/ASFLibrary'              // 可以填写github上的库地址.
+    issueTrackerUrl = 'https://github.com/GMA-Team/ASFLibrary/issue'  // 可以填写github库的issue地址.
+    vcsUrl = 'https://github.com/GMA-Team/ASFLibrary.git'              // 可以填写github上库的地址.
+    licenseName = "Apache-2.0"
+    libraryVersionDesc = 'version descriotion'
+
+    // maven
+    artifact = 'asflibrary'                                            // 必须和library module的名字相同
+    libraryName = 'asflibrary'
+    developerId = 'wangtingzheng'
+    developerName = 'wangtingzheng'
+    developerEmail = 'wangtingzheng@163.com'
+    licenseName = 'The Apache Software License, Version 2.0'
+    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+
+}
+apply from: 'android-maven-install.gradle'
+apply from: 'android-tasks.gradle'
+apply from: 'bintray.gradle'
+
+apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'com.jfrog.bintray'
